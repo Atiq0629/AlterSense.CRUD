@@ -1,0 +1,36 @@
+{% extends 'Library-App/layout.html' %}
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="card">
+            <h5 class="card-header bg-primary" style="color: aliceblue">Books List</h5>
+            <div class="card-body">
+            <a href="{% url 'library_app:add_books' %}" class="btn btn-primary btn-sm float-right">Add Data</a>
+                <br><br><br>
+                <div class="row">
+                        {% for books in books_list %}
+                            <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="/media/{{ books.picture }}" alt="{{ books.name }}" style="width: 100%; height: 250px;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="font-size: 16px;">{{ books.name }}</h5>
+                                    <p class="card-text" style="font-size: 14px;">{{ books.describe }}</p>
+                                    <hr>
+                                    <p class="card-text" style="font-size: 14px;">{{ books.author }}</p>
+
+                                    <a href="{% url 'library_app:edit_books' pk=books.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{% url 'library_app:delete_books' pk=books.id %}" class="btn btn-danger btn-sm float-right">Delete</a>
+                                </div>
+                            </div>
+                                <br>
+                            </div>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+{% endblock %}
